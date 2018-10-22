@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchInput renders component 1`] = `<input type="search" placeholder="" class="form-control">`;

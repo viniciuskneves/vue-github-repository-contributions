@@ -1,19 +1,20 @@
 <template>
-  <div id="app">App</div>
+  <div class="container-fuild">
+    <main-view />
+  </div>
 </template>
 
 <script>
+import MainView from '@/views/MainView.vue';
+
 export default {
   name: 'App',
+  components: {
+    MainView,
+  },
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
 </style>
