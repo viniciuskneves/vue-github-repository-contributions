@@ -2,7 +2,7 @@
   <li
     :class="customClasses"
     @click="$emit('click', name)"
-    class="list-group-item"
+    class="list-group-item list-group-item-action"
   >
     {{ name }}
   </li>
@@ -31,3 +31,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+li {
+  &:hover {
+    cursor: pointer;
+  }
+}
+</style>
