@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MainView renders view 1`] = `
-<div>
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <searchinput-stub placeholder="Type a GitHub username" class="col-12 col-md-3"></searchinput-stub>
-  </nav>
+<div class="col-12 col-md-6">
+  <searchinput-stub placeholder="Type a GitHub username"></searchinput-stub>
+  <searchlist-stub repositories="1,2"></searchlist-stub>
 </div>
 `;

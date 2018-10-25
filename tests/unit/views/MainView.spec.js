@@ -1,6 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import MainView from '@/views/MainView.vue';
 import SearchInput from '@/components/SearchInput.vue';
+import SearchList from '@/components/SearchList.vue';
 
 describe('MainView', () => {
   let wrapper;
@@ -9,26 +10,29 @@ describe('MainView', () => {
     wrapper = shallowMount(MainView);
   });
 
-  test('renders view', () => {
+  it('renders view', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  test('renders children components', () => {
+  it('renders children components', () => {
     const searchInput = wrapper.find(SearchInput);
+    const searchList = wrapper.find(SearchList);
 
     expect(searchInput.exists()).toBe(true);
+    expect(searchList.exists()).toBe(true);
   });
 
-  test('handle searchInput emit text', () => {
+  it('handle searchInput emit text', () => {
     const mock = jest.fn();
+    const username = 'some-github-username';
     const searchInput = wrapper.find(SearchInput);
 
     wrapper.setMethods({
       handleSearchUser: mock,
     });
 
-    searchInput.vm.$emit('text', 'githubusername');
+    searchInput.vm.$emit('text', username);
 
-    expect(mock).toHaveBeenCalledWith('githubusername');
+    expect(mock).toHaveBeenCalledWith(username);
   });
 });

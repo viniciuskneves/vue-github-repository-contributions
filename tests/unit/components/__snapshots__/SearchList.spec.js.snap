@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchList renders component 1`] = `<ul class="list-group"></ul>`;
