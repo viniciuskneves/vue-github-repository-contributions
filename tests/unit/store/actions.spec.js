@@ -1,6 +1,7 @@
 import actions from '@/store/actions';
 import api from '@/utils/api';
 import githubReposResponse from '../fixtures/githubReposResponse';
+import githubContributorsResponse from '../fixtures/githubContributorsResponse';
 
 describe('actions', () => {
   let commit;
@@ -8,6 +9,11 @@ describe('actions', () => {
   beforeEach(() => {
     commit = jest.fn();
     api.searchRepositories = jest.fn().mockResolvedValue(githubReposResponse);
+    api.searchContributors = jest.fn().mockResolvedValue(githubContributorsResponse);
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   describe('SEARCH_REPOSITORIES', () => {
@@ -18,6 +24,19 @@ describe('actions', () => {
       expect(api.searchRepositories).toHaveBeenCalledWith(username);
       expect(commit).toHaveBeenCalledWith('SET_REPOSITORIES', githubReposResponse);
       expect(actionResponse).toBe(githubReposResponse);
+    });
+  });
+
+  describe('SEARCH_CONTRIBUTORS', () => {
+    it('searches repository contributors', async () => {
+      const repository = 'github-repository';
+      const actionResponse = await actions.SEARCH_CONTRIBUTORS({ commit }, repository);
+
+      expect(commit).toHaveBeenCalledWith('SET_ACTIVE_REPOSITORY', repository);
+
+      expect(api.searchContributors).toHaveBeenCalledWith(repository);
+      expect(commit).toHaveBeenCalledWith('SET_CONTRIBUTORS', githubContributorsResponse);
+      expect(actionResponse).toBe(githubContributorsResponse);
     });
   });
 });

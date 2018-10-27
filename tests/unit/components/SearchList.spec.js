@@ -1,12 +1,25 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
 import SearchList from '@/components/SearchList.vue';
 import SearchListItem from '@/components/SearchListItem.vue';
+import actions from '@/store/actions';
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
 
 describe('SearchList', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(SearchList);
+    actions.SEARCH_CONTRIBUTORS = jest.fn();
+    wrapper = shallowMount(SearchList, {
+      localVue,
+      store: new Vuex.Store({ actions }),
+    });
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   it('renders component', () => {
@@ -50,5 +63,15 @@ describe('SearchList', () => {
     searchListItem.vm.$emit('click', repository);
 
     expect(mock).toHaveBeenCalledWith(repository);
+  });
+
+  it('delegates "handleItemClick" to action', () => {
+    const repository = 'some-github-repository';
+    const { vm } = wrapper;
+
+    vm.handleItemClick(repository);
+
+    expect(actions.SEARCH_CONTRIBUTORS).toHaveBeenCalled();
+    expect(actions.SEARCH_CONTRIBUTORS.mock.calls[0][1]).toBe(repository);
   });
 });

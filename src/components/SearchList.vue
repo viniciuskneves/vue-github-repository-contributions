@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     handleItemClick(repository) {
-      console.log(repository);
+      this.$store.dispatch('SEARCH_CONTRIBUTORS', repository);
     },
   },
 };
