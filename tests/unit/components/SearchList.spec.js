@@ -38,7 +38,16 @@ describe('SearchList', () => {
 
   it('render children when "repositories" is not empty', () => {
     wrapper.setProps({
-      repositories: ['repo1', 'repo2'],
+      repositories: [
+        {
+          displayName: 'displayName',
+          fullName: 'fullName',
+        },
+        {
+          displayName: 'displayName2',
+          fullName: 'fullName2',
+        },
+      ],
     });
 
     const searchListItems = wrapper.findAll(SearchListItem);
@@ -48,10 +57,19 @@ describe('SearchList', () => {
 
   it('handle searchListItem emit click', () => {
     const mock = jest.fn();
-    const repository = 'some-repo-name';
+    const repository = {
+      displayName: 'displayName',
+      fullName: 'fullName',
+    };
 
     wrapper.setProps({
-      repositories: [repository, 'repo2'],
+      repositories: [
+        repository,
+        {
+          displayName: 'displayName2',
+          fullName: 'fullName2',
+        },
+      ],
     });
 
     const searchListItem = wrapper.find(SearchListItem);

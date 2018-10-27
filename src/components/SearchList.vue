@@ -2,9 +2,9 @@
   <ul class="list-group">
     <search-list-item
       v-for="repository in repositories"
-      :key="repository"
-      :name="repository"
-      @click="handleItemClick"
+      :key="repository.fullName"
+      :name="repository.displayName"
+      @click="handleItemClick(repository)"
     />
   </ul>
 </template>
@@ -20,7 +20,7 @@ export default {
   props: {
     repositories: {
       type: Array,
-      requierd: false,
+      required: false,
       default: () => [],
     },
   },

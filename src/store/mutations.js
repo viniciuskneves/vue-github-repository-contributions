@@ -2,7 +2,10 @@ import Vue from 'vue';
 
 export default {
   SET_REPOSITORIES(state, repositories) {
-    const repositoriesName = repositories.map(_ => _.name);
+    const repositoriesName = repositories.map(_ => ({
+      displayName: _.name,
+      fullName: _.full_name,
+    }));
 
     Vue.set(state, 'repositories', repositoriesName);
   },

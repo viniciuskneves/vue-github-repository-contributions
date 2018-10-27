@@ -12,7 +12,10 @@ describe('mutations', () => {
 
   describe('SET_REPOSITORIES', () => {
     it('updates "state.repositories"', () => {
-      const names = githubReposResponse.map(_ => _.name);
+      const names = githubReposResponse.map(_ => ({
+        displayName: _.name,
+        fullName: _.full_name,
+      }));
 
       mutations.SET_REPOSITORIES(state, githubReposResponse);
 

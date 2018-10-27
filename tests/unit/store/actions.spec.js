@@ -29,12 +29,15 @@ describe('actions', () => {
 
   describe('SEARCH_CONTRIBUTORS', () => {
     it('searches repository contributors', async () => {
-      const repository = 'github-repository';
+      const repository = {
+        displayName: 'displayName',
+        fullName: 'fullName',
+      };
       const actionResponse = await actions.SEARCH_CONTRIBUTORS({ commit }, repository);
 
       expect(commit).toHaveBeenCalledWith('SET_ACTIVE_REPOSITORY', repository);
 
-      expect(api.searchContributors).toHaveBeenCalledWith(repository);
+      expect(api.searchContributors).toHaveBeenCalledWith(repository.fullName);
       expect(commit).toHaveBeenCalledWith('SET_CONTRIBUTORS', githubContributorsResponse);
       expect(actionResponse).toBe(githubContributorsResponse);
     });
