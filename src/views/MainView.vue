@@ -6,12 +6,13 @@
       @text="handleSearchUser"
     />
     <search-list
-     :repositories="['1', '2']"
+     :repositories="repositories"
     />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import SearchInput from '@/components/SearchInput.vue';
 import SearchList from '@/components/SearchList.vue';
 
@@ -21,6 +22,7 @@ export default {
     SearchInput,
     SearchList,
   },
+  computed: mapState(['repositories']),
   methods: {
     handleSearchUser(username) {
       this.$store.dispatch('SEARCH_REPOSITORIES', username);

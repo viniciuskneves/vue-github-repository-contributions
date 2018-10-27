@@ -4,23 +4,27 @@ import MainView from '@/views/MainView.vue';
 import SearchInput from '@/components/SearchInput.vue';
 import SearchList from '@/components/SearchList.vue';
 import actions from '@/store/actions';
+import baseState from '@/store/state';
+import githubReposResponse from '../fixtures/githubReposResponse';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('MainView', () => {
   let wrapper;
+  let state;
 
   beforeEach(() => {
     actions.SEARCH_REPOSITORIES = jest.fn();
     wrapper = shallowMount(MainView, {
       localVue,
-      store: new Vuex.Store({ actions }),
+      store: new Vuex.Store({ state, actions }),
     });
   });
 
   afterEach(() => {
     jest.resetAllMocks();
+    state = { ...baseState };
   });
 
   it('renders view', () => {
@@ -57,5 +61,13 @@ describe('MainView', () => {
 
     expect(actions.SEARCH_REPOSITORIES).toHaveBeenCalled();
     expect(actions.SEARCH_REPOSITORIES.mock.calls[0][1]).toBe(username);
+  });
+
+  it('binds "state.repositories" to searchList', () => {
+    state.repositories = githubReposResponse;
+
+    const searchList = wrapper.find(SearchList);
+
+    expect(searchList.vm.repositories).toBe(githubReposResponse);
   });
 });
