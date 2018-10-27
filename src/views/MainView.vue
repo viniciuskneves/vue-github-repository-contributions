@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     handleSearchUser(username) {
-      console.log(username);
+      this.$store.dispatch('SEARCH_REPOSITORIES', username);
     },
   },
 };

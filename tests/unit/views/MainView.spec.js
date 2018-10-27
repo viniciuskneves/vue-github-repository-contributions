@@ -1,13 +1,26 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
 import MainView from '@/views/MainView.vue';
 import SearchInput from '@/components/SearchInput.vue';
 import SearchList from '@/components/SearchList.vue';
+import actions from '@/store/actions';
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
 
 describe('MainView', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(MainView);
+    actions.SEARCH_REPOSITORIES = jest.fn();
+    wrapper = shallowMount(MainView, {
+      localVue,
+      store: new Vuex.Store({ actions }),
+    });
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   it('renders view', () => {
@@ -34,5 +47,15 @@ describe('MainView', () => {
     searchInput.vm.$emit('text', username);
 
     expect(mock).toHaveBeenCalledWith(username);
+  });
+
+  it('delegates "handleSearchUser" to action', () => {
+    const username = 'some-github-username';
+    const { vm } = wrapper;
+
+    vm.handleSearchUser(username);
+
+    expect(actions.SEARCH_REPOSITORIES).toHaveBeenCalled();
+    expect(actions.SEARCH_REPOSITORIES.mock.calls[0][1]).toBe(username);
   });
 });
