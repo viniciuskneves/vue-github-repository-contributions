@@ -1,13 +1,20 @@
 <template>
-  <div class="col-12 col-md-6 bg-light py-3 border">
-    <search-input
-      class="mb-2"
-      placeholder="Type a GitHub username"
-      @text="handleSearchUser"
-    />
-    <search-list
-     :repositories="repositories"
-    />
+  <div class="row">
+    <div class="col-12 col-md-6 bg-light py-3 border">
+      <search-input
+        class="mb-2"
+        placeholder="Type a GitHub username"
+        @text="handleSearchUser"
+      />
+      <search-list
+        :repositories="repositories"
+      />
+    </div>
+    <div class="col-12 col-md-6 bg-light py-3 border">
+      <repository-contributions-chart
+        :contributors="contributors"
+      />
+    </div>
   </div>
 </template>
 
@@ -15,14 +22,16 @@
 import { mapState } from 'vuex';
 import SearchInput from '@/components/SearchInput.vue';
 import SearchList from '@/components/SearchList.vue';
+import RepositoryContributionsChart from '@/components/RepositoryContributionsChart.vue';
 
 export default {
   name: 'MainView',
   components: {
     SearchInput,
     SearchList,
+    RepositoryContributionsChart,
   },
-  computed: mapState(['repositories']),
+  computed: mapState(['repositories', 'contributors']),
   methods: {
     handleSearchUser(username) {
       this.$store.dispatch('SEARCH_REPOSITORIES', username);
