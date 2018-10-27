@@ -4,12 +4,14 @@
       v-for="repository in repositories"
       :key="repository.fullName"
       :name="repository.displayName"
+      :active="repository === activeRepository"
       @click="handleItemClick(repository)"
     />
   </ul>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import SearchListItem from '@/components/SearchListItem.vue';
 
 export default {
@@ -24,6 +26,7 @@ export default {
       default: () => [],
     },
   },
+  computed: mapState(['activeRepository']),
   methods: {
     handleItemClick(repository) {
       this.$store.dispatch('SEARCH_CONTRIBUTORS', repository);
