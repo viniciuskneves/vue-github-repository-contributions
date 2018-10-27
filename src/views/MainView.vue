@@ -6,7 +6,7 @@
       @text="handleSearchUser"
     />
     <search-list
-     :repositories="[1, 2]"
+     :repositories="['1', '2']"
     />
   </div>
 </template>
