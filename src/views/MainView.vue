@@ -13,6 +13,7 @@
     <div class="col-12 col-md-6 bg-light py-3 border">
       <repository-contributions-chart
         :contributors="contributors"
+        :title="activeRepository.fullName"
       />
     </div>
   </div>
@@ -31,7 +32,7 @@ export default {
     SearchList,
     RepositoryContributionsChart,
   },
-  computed: mapState(['repositories', 'contributors']),
+  computed: mapState(['repositories', 'contributors', 'activeRepository']),
   methods: {
     handleSearchUser(username) {
       this.$store.dispatch('SEARCH_REPOSITORIES', username);

@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RepositoryContributionsChart render component 1`] = `<h1>RepositoryContributionsChart</h1>`;
+exports[`RepositoryContributionsChart render component 1`] = `<highcharts-stub constructortype="chart" options="[object Object]" updateargs="true,true"></highcharts-stub>`;

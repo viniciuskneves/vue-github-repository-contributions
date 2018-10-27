@@ -15,6 +15,7 @@ describe('MainView', () => {
   let state;
 
   beforeEach(() => {
+    state = { ...baseState };
     actions.SEARCH_REPOSITORIES = jest.fn();
     wrapper = shallowMount(MainView, {
       localVue,
@@ -24,7 +25,6 @@ describe('MainView', () => {
 
   afterEach(() => {
     jest.resetAllMocks();
-    state = { ...baseState };
   });
 
   it('renders view', () => {
@@ -89,5 +89,18 @@ describe('MainView', () => {
     const repositoryContributionsChart = wrapper.find(RepositoryContributionsChart);
 
     expect(repositoryContributionsChart.vm.contributors).toBe(contributors);
+  });
+
+  it('binds "state.activeRepository.fullName" to chart title', () => {
+    const repository = {
+      displayName: 'name',
+      fullName: 'fullName',
+    };
+
+    state.activeRepository = repository;
+
+    const repositoryContributionsChart = wrapper.find(RepositoryContributionsChart);
+
+    expect(repositoryContributionsChart.vm.title).toBe(repository.fullName);
   });
 });
