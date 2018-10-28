@@ -30,12 +30,19 @@ describe('SearchInput', () => {
   });
 
   test('emits input text', () => {
+    jest.useFakeTimers();
+
     const input = wrapper.find('input');
     const inputValue = 'someuser';
 
-    input.element.value = inputValue;
-    input.trigger('keyup');
+    wrapper.vm.value = inputValue;
 
+    jest.runAllTimers();
+
+    expect(setTimeout).toHaveBeenCalledTimes(1);
+    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 500);
+
+    expect(input.element.value).toBe(inputValue);
     expect(wrapper.emitted('text')[0][0]).toBe(inputValue);
   });
 });
