@@ -17,10 +17,9 @@ export default {
     let { contributors: data } = state;
 
     if (activeRepository !== repository) {
-      commit('SET_ACTIVE_REPOSITORY', repository);
-
       data = await api.searchContributors(repository.fullName);
 
+      commit('SET_ACTIVE_REPOSITORY', repository);
       commit('SET_CONTRIBUTORS', data);
     }
 
