@@ -3,18 +3,21 @@ import Vuex from 'vuex';
 import SearchList from '@/components/SearchList.vue';
 import SearchListItem from '@/components/SearchListItem.vue';
 import actions from '@/store/actions';
+import baseState from '@/store/state';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('SearchList', () => {
   let wrapper;
+  let state;
 
   beforeEach(() => {
+    state = { ...baseState };
     actions.SEARCH_CONTRIBUTORS = jest.fn();
     wrapper = shallowMount(SearchList, {
       localVue,
-      store: new Vuex.Store({ actions }),
+      store: new Vuex.Store({ state, actions }),
     });
   });
 

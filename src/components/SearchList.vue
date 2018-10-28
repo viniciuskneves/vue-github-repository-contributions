@@ -4,7 +4,7 @@
       v-for="repository in repositories"
       :key="repository.fullName"
       :name="repository.displayName"
-      :active="repository === activeRepository"
+      :active="repository.fullName === activeRepository.fullName"
       @click="handleItemClick(repository)"
     />
   </ul>
