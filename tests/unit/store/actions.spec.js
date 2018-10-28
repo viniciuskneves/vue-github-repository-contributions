@@ -17,13 +17,22 @@ describe('actions', () => {
   });
 
   describe('SEARCH_REPOSITORIES', () => {
-    it('searches user repositories', async () => {
+    it('searches user repositories when username is not empty', async () => {
       const username = 'github-username';
       const actionResponse = await actions.SEARCH_REPOSITORIES({ commit }, username);
 
       expect(api.searchRepositories).toHaveBeenCalledWith(username);
       expect(commit).toHaveBeenCalledWith('SET_REPOSITORIES', githubReposResponse);
       expect(actionResponse).toBe(githubReposResponse);
+    });
+
+    it('does not searches user repositories when username is empty', async () => {
+      const username = '';
+      const actionResponse = await actions.SEARCH_REPOSITORIES({ commit }, username);
+
+      expect(api.searchRepositories).not.toHaveBeenCalled();
+      expect(commit).toHaveBeenCalledWith('SET_REPOSITORIES', []);
+      expect(actionResponse).toEqual([]);
     });
   });
 
