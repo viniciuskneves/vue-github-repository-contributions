@@ -52,5 +52,4 @@ describe('SearchListItem', () => {
 
     expect(wrapper.emitted('click')[0][0]).toBe(name);
   });
-
 });
