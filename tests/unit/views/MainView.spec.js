@@ -38,6 +38,24 @@ describe('MainView', () => {
 
     expect(searchInput.exists()).toBe(true);
     expect(searchList.exists()).toBe(true);
+    expect(repositoryContributionsChart.exists()).toBe(false);
+  });
+
+  it('renders charts only when contributors and activeRepository', () => {
+    const contributors = [{
+      name: 'name',
+      count: 10,
+    }];
+    const repository = {
+      displayName: 'name',
+      fullName: 'fullName',
+    };
+
+    state.activeRepository = repository;
+    state.contributors = contributors;
+
+    const repositoryContributionsChart = wrapper.find(RepositoryContributionsChart);
+
     expect(repositoryContributionsChart.exists()).toBe(true);
   });
 
@@ -96,7 +114,12 @@ describe('MainView', () => {
       displayName: 'name',
       fullName: 'fullName',
     };
+    const contributors = [{
+      name: 'name',
+      count: 10,
+    }];
 
+    state.contributors = contributors;
     state.activeRepository = repository;
 
     const repositoryContributionsChart = wrapper.find(RepositoryContributionsChart);

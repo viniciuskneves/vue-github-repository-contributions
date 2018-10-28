@@ -21,8 +21,6 @@ describe('actions', () => {
       const username = 'github-username';
       const actionResponse = await actions.SEARCH_REPOSITORIES({ commit }, username);
 
-      expect(commit).toHaveBeenCalledWith('SET_ACTIVE_REPOSITORY', {});
-
       expect(api.searchRepositories).toHaveBeenCalledWith(username);
       expect(commit).toHaveBeenCalledWith('SET_REPOSITORIES', githubReposResponse);
       expect(actionResponse).toBe(githubReposResponse);

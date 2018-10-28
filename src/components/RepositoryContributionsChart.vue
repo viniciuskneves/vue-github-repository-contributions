@@ -26,6 +26,9 @@ export default {
         title: {
           text: this.title,
         },
+        chart: {
+          backgroundColor: 'rgba(255, 255, 255, 0.0)', // transparent
+        },
         yAxis: {
           title: {
             text: 'Contributions',

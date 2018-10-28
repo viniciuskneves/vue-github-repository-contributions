@@ -10,7 +10,10 @@
         :repositories="repositories"
       />
     </div>
-    <div class="col-12 col-md-6 bg-light py-3 border">
+    <div
+      v-if="contributors.length && Object.keys(activeRepository)"
+      class="col-12 col-md-6 bg-light py-3 border"
+    >
       <repository-contributions-chart
         :contributors="contributors"
         :title="activeRepository.fullName"
