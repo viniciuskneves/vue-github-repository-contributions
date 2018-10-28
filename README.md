@@ -1,31 +1,39 @@
 # vue-github-repository-contributions
 
-## Project setup
+Searches for a GitHub username, list its repositories and then check its contributors and contributions.
+
+Made with Vue (Vue CLI 3), Bootstrap and Highcharts!
+
+## Setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Development
+Runs local server for development purpose.
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Production
+Builds for production.
 ```
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
+## Tests and linting
 
-### Lints and fixes files
+### Lint (with autofix)
 ```
 npm run lint
 ```
 
-### Run your unit tests
+### Tests (Unit)
 ```
 npm run test:unit
+```
+
+If you want to do TDD (all the project was developed that way) I do recommend to enable watching while running tests.
+```
+npm run test:unit:watch
 ```
