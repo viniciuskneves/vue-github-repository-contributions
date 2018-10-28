@@ -12,12 +12,17 @@ export default {
 
     return data;
   },
-  async SEARCH_CONTRIBUTORS({ commit }, repository) {
-    commit('SET_ACTIVE_REPOSITORY', repository);
+  async SEARCH_CONTRIBUTORS({ state, commit }, repository) {
+    const { activeRepository } = state;
+    let { contributors: data } = state;
 
-    const data = await api.searchContributors(repository.fullName);
+    if (activeRepository !== repository) {
+      commit('SET_ACTIVE_REPOSITORY', repository);
 
-    commit('SET_CONTRIBUTORS', data);
+      data = await api.searchContributors(repository.fullName);
+
+      commit('SET_CONTRIBUTORS', data);
+    }
 
     return data;
   },
