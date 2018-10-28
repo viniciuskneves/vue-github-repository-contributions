@@ -35,10 +35,12 @@ describe('MainView', () => {
     const searchInput = wrapper.find(SearchInput);
     const searchList = wrapper.find(SearchList);
     const repositoryContributionsChart = wrapper.find(RepositoryContributionsChart);
+    const welcomeMessage = wrapper.find('h5');
 
     expect(searchInput.exists()).toBe(true);
     expect(searchList.exists()).toBe(true);
     expect(repositoryContributionsChart.exists()).toBe(false);
+    expect(welcomeMessage.exists()).toBe(true);
   });
 
   it('renders charts only when contributors and activeRepository', () => {
@@ -57,6 +59,23 @@ describe('MainView', () => {
     const repositoryContributionsChart = wrapper.find(RepositoryContributionsChart);
 
     expect(repositoryContributionsChart.exists()).toBe(true);
+  });
+
+  it('shows message when there are no contributors', () => {
+    const contributors = [];
+    const repository = {
+      displayName: 'name',
+      fullName: 'fullName',
+    };
+
+    state.activeRepository = repository;
+    state.contributors = contributors;
+
+    const repositoryContributionsChart = wrapper.find(RepositoryContributionsChart);
+    const noContributorsMessage = wrapper.find('h3');
+
+    expect(repositoryContributionsChart.exists()).toBe(false);
+    expect(noContributorsMessage.exists()).toBe(true);
   });
 
   it('handle searchInput emit text', () => {
@@ -97,12 +116,17 @@ describe('MainView', () => {
   });
 
   it('binds "state.contributors" to chart', () => {
+    const repository = {
+      displayName: 'name',
+      fullName: 'fullName',
+    };
     const contributors = [{
       name: 'name',
       count: 10,
     }];
 
     state.contributors = contributors;
+    state.activeRepository = repository;
 
     const repositoryContributionsChart = wrapper.find(RepositoryContributionsChart);
 

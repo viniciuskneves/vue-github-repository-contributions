@@ -10,14 +10,19 @@
         :repositories="repositories"
       />
     </div>
-    <div
-      v-if="contributors.length && Object.keys(activeRepository)"
-      class="col-12 col-md-6 bg-light py-3 border"
-    >
+    <div class="col-12 col-md-6 bg-light py-3 border">
       <repository-contributions-chart
+        v-if="contributors.length && Object.keys(activeRepository).length"
         :contributors="contributors"
         :title="activeRepository.fullName"
       />
+      <h3 v-else-if="!contributors.length && Object.keys(activeRepository).length">
+        There are no contributions to this repository, please select another repository.
+      </h3>
+      <h5 v-else>
+        Looks like you haven't selected a repository yet.
+        Please type any GitHub username in the searchbox and then select a repository from the list.
+      </h5>
     </div>
   </div>
 </template>

@@ -6,6 +6,11 @@ exports[`MainView renders view 1`] = `
     <searchinput-stub placeholder="Type a GitHub username" class="mb-2"></searchinput-stub>
     <searchlist-stub repositories=""></searchlist-stub>
   </div>
-  <!---->
+  <div class="col-12 col-md-6 bg-light py-3 border">
+    <h5>
+      Looks like you haven't selected a repository yet.
+      Please type any GitHub username in the searchbox and then select a repository from the list.
+    </h5>
+  </div>
 </div>
 `;
