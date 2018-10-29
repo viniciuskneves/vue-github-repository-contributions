@@ -1,4 +1,4 @@
-# vue-github-repository-contributions
+# [vue-github-repository-contributions](http://vue-github-repository-contributions.surge.sh/)
 
 Searches for a GitHub username, list its repositories and then check its contributors and contributions.
 
@@ -19,6 +19,12 @@ npm run serve
 Builds for production.
 ```
 npm run build
+```
+
+## Deploy
+The project is automatically deployed to Surge. The following command will automatically build the project before deploying.
+```
+npm run deploy
 ```
 
 ## Tests and linting
