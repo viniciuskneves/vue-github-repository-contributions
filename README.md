@@ -1,31 +1,45 @@
-# vue-github-repository-contributions
+# [vue-github-repository-contributions](http://vue-github-repository-contributions.surge.sh/)
 
-## Project setup
+Searches for a GitHub username, list its repositories and then check its contributors and contributions.
+
+Made with Vue (Vue CLI 3), Bootstrap and Highcharts!
+
+## Setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Development
+Runs local server for development purpose.
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Production
+Builds for production.
 ```
 npm run build
 ```
 
-### Run your tests
+## Deploy
+The project is automatically deployed to Surge. The following command will automatically build the project before deploying.
 ```
-npm run test
+npm run deploy
 ```
 
-### Lints and fixes files
+## Tests and linting
+
+### Lint (with autofix)
 ```
 npm run lint
 ```
 
-### Run your unit tests
+### Tests (Unit)
 ```
 npm run test:unit
+```
+
+If you want to do TDD (all the project was developed that way) I do recommend to enable watching while running tests.
+```
+npm run test:unit:watch
 ```
