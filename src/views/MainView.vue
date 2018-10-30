@@ -3,20 +3,23 @@
     <div class="col-12 col-md-6 bg-light py-3 border">
       <search-input
         class="mb-2"
+        v-model="username"
         placeholder="Type a GitHub username"
-        @text="handleSearchUser"
       />
+      <div class="alert alert-info" v-if="isLoading">
+        Loading...
+      </div>
       <search-list
         :repositories="repositories"
       />
     </div>
     <div class="col-12 col-md-6 bg-light py-3 border">
       <repository-contributions-chart
-        v-if="contributors.length && Object.keys(activeRepository).length"
+        v-if="hasContributors"
         :contributors="contributors"
         :title="activeRepository.fullName"
       />
-      <h3 v-else-if="!contributors.length && Object.keys(activeRepository).length">
+      <h3 v-else-if="!hasContributors">
         There are no contributions to this repository, please select another repository.
       </h3>
       <h5 v-else>
@@ -28,7 +31,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import SearchInput from '@/components/SearchInput.vue';
 import SearchList from '@/components/SearchList.vue';
 import RepositoryContributionsChart from '@/components/RepositoryContributionsChart.vue';
@@ -40,10 +43,33 @@ export default {
     SearchList,
     RepositoryContributionsChart,
   },
-  computed: mapState(['repositories', 'contributors', 'activeRepository']),
+  data() {
+    return {
+      isLoading: false,
+      username: '',
+    };
+  },
+  computed: {
+    ...mapState(['repositories', 'contributors', 'activeRepository']),
+    hasContributors() {
+      return this.contributors.length && Object.keys(this.activeRepository).length;
+    },
+  },
+  watch: {
+    username: 'handleSearchUser',
+  },
   methods: {
+    ...mapActions({
+      searchRepositories: 'SEARCH_REPOSITORIES',
+    }),
     handleSearchUser(username) {
-      this.$store.dispatch('SEARCH_REPOSITORIES', username);
+      this.isLoading = true;
+      const onDone = () => {
+        this.isLoading = false;
+      };
+
+      this.searchRepositories(username)
+        .then(onDone, onDone);
     },
   },
 };
