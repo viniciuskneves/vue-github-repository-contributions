@@ -12,12 +12,11 @@ let timeoutId;
 
 export default {
   name: 'SearchInput',
-  data() {
-    return {
-      value: '',
-    };
-  },
   props: {
+    value: {
+      type: String,
+      required: true,
+    },
     placeholder: {
       type: String,
       required: false,
@@ -35,7 +34,7 @@ export default {
   },
   methods: {
     emitOnDebounce(value) {
-      this.$emit('text', value);
+      this.$emit('input', value);
     },
   },
 };
