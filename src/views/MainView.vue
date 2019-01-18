@@ -20,6 +20,7 @@
         There are no contributions to this repository, please select another repository.
       </h3>
       <h5 v-else>
+        Travist, is that you?
         Looks like you haven't selected a repository yet.
         Please type any GitHub username in the searchbox and then select a repository from the list.
       </h5>
