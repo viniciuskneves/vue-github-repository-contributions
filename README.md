@@ -1,5 +1,7 @@
 # [vue-github-repository-contributions](http://vue-github-repository-contributions.surge.sh/)
 
+![build-travis](https://travis-ci.com/osmarpetry/vue-github-repository-contributions.svg?branch=master)
+
 Searches for a GitHub username, list its repositories and then check its contributors and contributions.
 
 Made with Vue (Vue CLI 3), Bootstrap and Highcharts!
