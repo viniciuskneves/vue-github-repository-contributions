@@ -5,12 +5,8 @@ cache:
   directories:
     - node_modules
 script:
-  - yarn lint
-  - yarn build
-deploy:
-  provider: surge
-  skip_cleanup: true
-  domain: vue-github-repository-contributions-2019.surge.sh
-  project: ./dist/
+  - npm run lint
+  - npm run build
+  - npm run deploy
 on:
   branch: master
