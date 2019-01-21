@@ -29,20 +29,32 @@ describe('SearchInput', () => {
     expect(input.attributes('placeholder')).toBe(placeholder);
   });
 
-  test('emits input text', () => {
+  test('calls emitOnDebounce on @input', () => {
+    const mock = jest.fn();
+    const value = 'some-user';
+    const input = wrapper.find('input');
+
+    wrapper.setMethods({
+      emitOnDebounce: mock,
+    });
+    input.setValue(value);
+
+    expect(mock).toHaveBeenCalledWith(value);
+  });
+
+  test('emits with debounce on text change', () => {
     jest.useFakeTimers();
 
+    const value = 'some-user';
     const input = wrapper.find('input');
-    const inputValue = 'someuser';
 
-    wrapper.vm.value = inputValue;
+    input.setValue(value);
 
     jest.runAllTimers();
 
     expect(setTimeout).toHaveBeenCalledTimes(1);
     expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 500);
 
-    expect(input.element.value).toBe(inputValue);
-    expect(wrapper.emitted('text')[0][0]).toBe(inputValue);
+    expect(wrapper.emitted('text')[0][0]).toBe(value);
   });
 });

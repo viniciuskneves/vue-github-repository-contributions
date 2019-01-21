@@ -2,7 +2,7 @@
   <input
     class="form-control"
     type="search"
-    v-model.trim="value"
+    @input="emitOnDebounce($event.target.value)"
     :placeholder="placeholder"
   />
 </template>
@@ -12,11 +12,6 @@ let timeoutId;
 
 export default {
   name: 'SearchInput',
-  data() {
-    return {
-      value: '',
-    };
-  },
   props: {
     placeholder: {
       type: String,
@@ -24,18 +19,12 @@ export default {
       default: '',
     },
   },
-  watch: {
-    value(newValue) {
-      // TODO: Use request time instead of debounce as it will improve experience
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        this.emitOnDebounce(newValue);
-      }, 500);
-    },
-  },
   methods: {
     emitOnDebounce(value) {
-      this.$emit('text', value);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        this.$emit('text', value);
+      }, 500);
     },
   },
 };
